@@ -1,20 +1,35 @@
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Page fully loaded!");
+});
+
 function generateRhombus() {
     let height = parseInt(document.getElementById("height").value);
     let colorOdd = document.getElementById("colorOdd").value;
     let colorEven = document.getElementById("colorEven").value;
     let symbol = document.getElementById("symbol").value;
 
+  
+    let upLeftDiv = document.getElementById("upLeft");
+    let upRightDiv = document.getElementById("upRight");
+    let downLeftDiv = document.getElementById("downLeft");
+    let downRightDiv = document.getElementById("downRight");
+
+    if (!upLeftDiv || !upRightDiv || !downLeftDiv || !downRightDiv) {
+        console.error("Error: One or more required divs are missing.");
+        return;
+    }
+
     // Clear previous output
-    document.getElementById("upLeft").innerHTML = "";
-    document.getElementById("upRight").innerHTML = "";
-    document.getElementById("downLeft").innerHTML = "";
-    document.getElementById("downRight").innerHTML = "";
+    upLeftDiv.innerHTML = "";
+    upRightDiv.innerHTML = "";
+    downLeftDiv.innerHTML = "";
+    downRightDiv.innerHTML = "";
 
     // Generate all four sections
-    document.getElementById("upRight").innerHTML = upRight(height, colorOdd, colorEven, symbol);
-    document.getElementById("downRight").innerHTML = downRight(height, colorOdd, colorEven, symbol);
-    document.getElementById("upLeft").innerHTML = upLeft(height, colorOdd, colorEven, symbol);
-    document.getElementById("downLeft").innerHTML = downLeft(height, colorOdd, colorEven, symbol);
+    upRightDiv.innerHTML = upRight(height, colorOdd, colorEven, symbol);
+    downRightDiv.innerHTML = downRight(height, colorOdd, colorEven, symbol);
+    upLeftDiv.innerHTML = upLeft(height, colorOdd, colorEven, symbol);
+    downLeftDiv.innerHTML = downLeft(height, colorOdd, colorEven, symbol);
 }
 
 // Upper Right Triangle (🔺)
@@ -50,7 +65,7 @@ function upLeft(height, colorOdd, colorEven, symbol) {
     let rhombusHTML = "";
     for (let i = 1; i <= height; i++) {
         rhombusHTML += "<p style='text-align:center;'>";
-        rhombusHTML += "&nbsp;".repeat((height - i) * 2); // Adds proper centering
+        rhombusHTML += "&nbsp;".repeat((height - i) * 2); 
         for (let j = 0; j < i; j++) {
             let color = (j % 2 === 0) ? colorOdd : colorEven;
             rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
@@ -65,7 +80,7 @@ function downLeft(height, colorOdd, colorEven, symbol) {
     let rhombusHTML = "";
     for (let i = height - 1; i > 0; i--) {
         rhombusHTML += "<p style='text-align:center;'>";
-        rhombusHTML += "&nbsp;".repeat((height - i) * 2); // Adds proper centering
+        rhombusHTML += "&nbsp;".repeat((height - i) * 2); 
         for (let j = 0; j < i; j++) {
             let color = (j % 2 === 0) ? colorOdd : colorEven;
             rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
