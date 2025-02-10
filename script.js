@@ -4,66 +4,73 @@ function generateRhombus() {
     let colorEven = document.getElementById("colorEven").value;
     let symbol = document.getElementById("symbol").value;
 
-    let outputDiv = document.getElementById("output");
-    outputDiv.innerHTML = ""; // Clear previous output
+    // Clear previous output
+    document.getElementById("upLeft").innerHTML = "";
+    document.getElementById("upRight").innerHTML = "";
+    document.getElementById("downLeft").innerHTML = "";
+    document.getElementById("downRight").innerHTML = "";
 
+    // Generate all four sections
+    document.getElementById("upRight").innerHTML = upRight(height, colorOdd, colorEven, symbol);
+    document.getElementById("downRight").innerHTML = downRight(height, colorOdd, colorEven, symbol);
+    document.getElementById("upLeft").innerHTML = upLeft(height, colorOdd, colorEven, symbol);
+    document.getElementById("downLeft").innerHTML = downLeft(height, colorOdd, colorEven, symbol);
+}
+
+// Upper Right Triangle (🔺)
+function upRight(height, colorOdd, colorEven, symbol) {
     let rhombusHTML = "";
-
-    // Generate top-left and top-right (upper part of rhombus)
     for (let i = 1; i <= height; i++) {
         rhombusHTML += "<p style='text-align:center;'>";
-        rhombusHTML += upLeft(i, height, colorOdd, colorEven, symbol);
-        rhombusHTML += upRight(i, colorOdd, colorEven, symbol);
+        for (let j = 0; j < i; j++) {
+            let color = (j % 2 === 0) ? colorOdd : colorEven;
+            rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
+        }
         rhombusHTML += "</p>";
     }
+    return rhombusHTML;
+}
 
-    // Generate bottom-left and bottom-right (lower part of rhombus)
+// Lower Right Triangle (🔻)
+function downRight(height, colorOdd, colorEven, symbol) {
+    let rhombusHTML = "";
     for (let i = height - 1; i > 0; i--) {
         rhombusHTML += "<p style='text-align:center;'>";
-        rhombusHTML += downLeft(i, height, colorOdd, colorEven, symbol);
-        rhombusHTML += downRight(i, colorOdd, colorEven, symbol);
+        for (let j = 0; j < i; j++) {
+            let color = (j % 2 === 0) ? colorOdd : colorEven;
+            rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
+        }
         rhombusHTML += "</p>";
     }
-
-    outputDiv.innerHTML = rhombusHTML;
+    return rhombusHTML;
 }
 
-// Upper Left Section (adds spaces for centering)
-function upLeft(row, height, colorOdd, colorEven, symbol) {
-    let leftHTML = "&nbsp;".repeat((height - row) * 2); // Double the spacing for centering
-    for (let j = 0; j < row; j++) {
-        let color = (j % 2 === 0) ? colorOdd : colorEven;
-        leftHTML += `<span style="color:${color};">${symbol}</span>`;
+// Upper Left Triangle (🔺)
+function upLeft(height, colorOdd, colorEven, symbol) {
+    let rhombusHTML = "";
+    for (let i = 1; i <= height; i++) {
+        rhombusHTML += "<p style='text-align:center;'>";
+        rhombusHTML += "&nbsp;".repeat((height - i) * 2); // Adds proper centering
+        for (let j = 0; j < i; j++) {
+            let color = (j % 2 === 0) ? colorOdd : colorEven;
+            rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
+        }
+        rhombusHTML += "</p>";
     }
-    return leftHTML;
+    return rhombusHTML;
 }
 
-// Upper Right Section (connects to left side)
-function upRight(row, colorOdd, colorEven, symbol) {
-    let rightHTML = "";
-    for (let j = 0; j < row - 1; j++) { // Start at 0 to connect with left side
-        let color = (j % 2 === 0) ? colorOdd : colorEven;
-        rightHTML += `<span style="color:${color};">${symbol}</span>`;
+// Lower Left Triangle (🔻)
+function downLeft(height, colorOdd, colorEven, symbol) {
+    let rhombusHTML = "";
+    for (let i = height - 1; i > 0; i--) {
+        rhombusHTML += "<p style='text-align:center;'>";
+        rhombusHTML += "&nbsp;".repeat((height - i) * 2); // Adds proper centering
+        for (let j = 0; j < i; j++) {
+            let color = (j % 2 === 0) ? colorOdd : colorEven;
+            rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
+        }
+        rhombusHTML += "</p>";
     }
-    return rightHTML;
-}
-
-// Lower Left Section (adds spaces for centering)
-function downLeft(row, height, colorOdd, colorEven, symbol) {
-    let leftHTML = "&nbsp;".repeat((height - row) * 2); // Double the spacing for centering
-    for (let j = 0; j < row; j++) {
-        let color = (j % 2 === 0) ? colorOdd : colorEven;
-        leftHTML += `<span style="color:${color};">${symbol}</span>`;
-    }
-    return leftHTML;
-}
-
-// Lower Right Section (connects to left side)
-function downRight(row, colorOdd, colorEven, symbol) {
-    let rightHTML = "";
-    for (let j = 0; j < row - 1; j++) { // Start at 0 to connect with left side
-        let color = (j % 2 === 0) ? colorOdd : colorEven;
-        rightHTML += `<span style="color:${color};">${symbol}</span>`;
-    }
-    return rightHTML;
+    return rhombusHTML;
 }
