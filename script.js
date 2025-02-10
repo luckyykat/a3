@@ -9,7 +9,7 @@ function generateRhombus() {
 
     let rhombusHTML = "";
 
-    // Generate top-left and top-right
+    // Generate top-left and top-right (upper part of rhombus)
     for (let i = 1; i <= height; i++) {
         rhombusHTML += "<p style='text-align:center;'>";
         rhombusHTML += upLeft(i, height, colorOdd, colorEven, symbol);
@@ -17,7 +17,7 @@ function generateRhombus() {
         rhombusHTML += "</p>";
     }
 
-    // Generate bottom-left and bottom-right
+    // Generate bottom-left and bottom-right (lower part of rhombus)
     for (let i = height - 1; i > 0; i--) {
         rhombusHTML += "<p style='text-align:center;'>";
         rhombusHTML += downLeft(i, height, colorOdd, colorEven, symbol);
@@ -28,7 +28,7 @@ function generateRhombus() {
     outputDiv.innerHTML = rhombusHTML;
 }
 
-// Upper Left Section
+// Upper Left Section (adds spaces for centering)
 function upLeft(row, height, colorOdd, colorEven, symbol) {
     let leftHTML = "&nbsp;".repeat(height - row); // Add spaces for centering
     for (let j = 0; j < row; j++) {
@@ -38,17 +38,17 @@ function upLeft(row, height, colorOdd, colorEven, symbol) {
     return leftHTML;
 }
 
-// Upper Right Section
+// Upper Right Section (connects to left)
 function upRight(row, colorOdd, colorEven, symbol) {
     let rightHTML = "";
-    for (let j = 1; j < row; j++) { // Starts at 1 to avoid duplicate center
+    for (let j = 0; j < row - 1; j++) { // Start at 0 to connect with left
         let color = (j % 2 === 0) ? colorOdd : colorEven;
         rightHTML += `<span style="color:${color};">${symbol}</span>`;
     }
     return rightHTML;
 }
 
-// Lower Left Section
+// Lower Left Section (adds spaces for centering)
 function downLeft(row, height, colorOdd, colorEven, symbol) {
     let leftHTML = "&nbsp;".repeat(height - row); // Add spaces for centering
     for (let j = 0; j < row; j++) {
@@ -58,10 +58,10 @@ function downLeft(row, height, colorOdd, colorEven, symbol) {
     return leftHTML;
 }
 
-// Lower Right Section
+// Lower Right Section (connects to left)
 function downRight(row, colorOdd, colorEven, symbol) {
     let rightHTML = "";
-    for (let j = 1; j < row; j++) { // Starts at 1 to avoid duplicate center
+    for (let j = 0; j < row - 1; j++) { // Start at 0 to connect with left
         let color = (j % 2 === 0) ? colorOdd : colorEven;
         rightHTML += `<span style="color:${color};">${symbol}</span>`;
     }
