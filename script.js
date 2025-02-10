@@ -9,47 +9,28 @@ function generateRhombus() {
 
     let rhombusHTML = "";
 
-    // Generate top half
+    // Generate top-left and top-right
     for (let i = 1; i <= height; i++) {
         rhombusHTML += "<p style='text-align:center;'>";
-        rhombusHTML += "&nbsp;".repeat(height - i); // Add spaces for centering
-        rhombusHTML += createRow(i, colorOdd, colorEven, symbol);
+        rhombusHTML += upLeft(i, height, colorOdd, colorEven, symbol);
+        rhombusHTML += upRight(i, colorOdd, colorEven, symbol);
         rhombusHTML += "</p>";
     }
 
-    // Generate bottom half
+    // Generate bottom-left and bottom-right
     for (let i = height - 1; i > 0; i--) {
         rhombusHTML += "<p style='text-align:center;'>";
-        rhombusHTML += "&nbsp;".repeat(height - i); // Add spaces for centering
-        rhombusHTML += createRow(i, colorOdd, colorEven, symbol);
+        rhombusHTML += downLeft(i, height, colorOdd, colorEven, symbol);
+        rhombusHTML += downRight(i, colorOdd, colorEven, symbol);
         rhombusHTML += "</p>";
     }
 
     outputDiv.innerHTML = rhombusHTML;
 }
 
-// Creates a row with alternating colors
-function createRow(row, colorOdd, colorEven, symbol) {
-    let rowHTML = "";
-    for (let j = 0; j < row * 2 - 1; j++) { // Multiply by 2 to make it symmetrical
-        let color = (j % 2 === 0) ? colorOdd : colorEven;
-        rowHTML += `<span style="color:${color};">${symbol}</span>`;
-    }
-    return rowHTML;
-}
-
-    console.log("Rhombus generated successfully!");
-    outputDiv.innerHTML = rhombusHTML;
-}
-
-// Left side of rhombus (upLeft & downLeft)
-function createLeftSide(row, height, colorOdd, colorEven, symbol) {
-    let leftHTML = "";
-    // Add spaces for alignment
-    for (let j = 0; j < height - row; j++) {
-        leftHTML += `<span style="visibility:hidden;">${symbol}</span>`;
-    }
-    // Add symbols
+// Upper Left Section
+function upLeft(row, height, colorOdd, colorEven, symbol) {
+    let leftHTML = "&nbsp;".repeat(height - row); // Add spaces for centering
     for (let j = 0; j < row; j++) {
         let color = (j % 2 === 0) ? colorOdd : colorEven;
         leftHTML += `<span style="color:${color};">${symbol}</span>`;
@@ -57,11 +38,30 @@ function createLeftSide(row, height, colorOdd, colorEven, symbol) {
     return leftHTML;
 }
 
-// Right side of rhombus (upRight & downRight)
-function createRightSide(row, colorOdd, colorEven, symbol) {
+// Upper Right Section
+function upRight(row, colorOdd, colorEven, symbol) {
     let rightHTML = "";
-    // Add symbols
+    for (let j = 1; j < row; j++) { // Starts at 1 to avoid duplicate center
+        let color = (j % 2 === 0) ? colorOdd : colorEven;
+        rightHTML += `<span style="color:${color};">${symbol}</span>`;
+    }
+    return rightHTML;
+}
+
+// Lower Left Section
+function downLeft(row, height, colorOdd, colorEven, symbol) {
+    let leftHTML = "&nbsp;".repeat(height - row); // Add spaces for centering
     for (let j = 0; j < row; j++) {
+        let color = (j % 2 === 0) ? colorOdd : colorEven;
+        leftHTML += `<span style="color:${color};">${symbol}</span>`;
+    }
+    return leftHTML;
+}
+
+// Lower Right Section
+function downRight(row, colorOdd, colorEven, symbol) {
+    let rightHTML = "";
+    for (let j = 1; j < row; j++) { // Starts at 1 to avoid duplicate center
         let color = (j % 2 === 0) ? colorOdd : colorEven;
         rightHTML += `<span style="color:${color};">${symbol}</span>`;
     }
