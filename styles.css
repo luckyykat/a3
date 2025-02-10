@@ -4,10 +4,13 @@ body {
     background-color: #f5f5f5;
 }
 
-#upLeft, #upRight, #downLeft, #downRight {
+h1, h2 {
+    margin-bottom: 15px;
+}
+
+#output {
     font-family: monospace;
+    text-align: center;
     margin-top: 20px;
     line-height: 1.5;
-    min-width: 50px;
-    padding: 5px;
 }
