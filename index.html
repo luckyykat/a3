@@ -8,7 +8,8 @@
 </head>
 <body>
     <h1>Rhombus Generator</h1>
-    <h2> Katherine L.</h2>
+    <h2>Katherine L</h2>
+
     <label>Height of each section:</label>
     <input type="number" id="height" min="1" required><br>
 
@@ -35,7 +36,14 @@
 
     <button onclick="generateRhombus()">Generate Rhombus</button>
 
-    <div id="output"></div>
+    <div style="display: flex; justify-content: center;">
+        <div id="upLeft"></div>
+        <div id="upRight"></div>
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <div id="downLeft"></div>
+        <div id="downRight"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
