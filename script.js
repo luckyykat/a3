@@ -30,7 +30,7 @@ function generateRhombus() {
 
 // Upper Left Section (adds spaces for centering)
 function upLeft(row, height, colorOdd, colorEven, symbol) {
-    let leftHTML = "&nbsp;".repeat(height - row); // Add spaces for centering
+    let leftHTML = "&nbsp;".repeat((height - row) * 2); // Double the spacing for centering
     for (let j = 0; j < row; j++) {
         let color = (j % 2 === 0) ? colorOdd : colorEven;
         leftHTML += `<span style="color:${color};">${symbol}</span>`;
@@ -38,10 +38,10 @@ function upLeft(row, height, colorOdd, colorEven, symbol) {
     return leftHTML;
 }
 
-// Upper Right Section (connects to left)
+// Upper Right Section (connects to left side)
 function upRight(row, colorOdd, colorEven, symbol) {
     let rightHTML = "";
-    for (let j = 0; j < row - 1; j++) { // Start at 0 to connect with left
+    for (let j = 0; j < row - 1; j++) { // Start at 0 to connect with left side
         let color = (j % 2 === 0) ? colorOdd : colorEven;
         rightHTML += `<span style="color:${color};">${symbol}</span>`;
     }
@@ -50,7 +50,7 @@ function upRight(row, colorOdd, colorEven, symbol) {
 
 // Lower Left Section (adds spaces for centering)
 function downLeft(row, height, colorOdd, colorEven, symbol) {
-    let leftHTML = "&nbsp;".repeat(height - row); // Add spaces for centering
+    let leftHTML = "&nbsp;".repeat((height - row) * 2); // Double the spacing for centering
     for (let j = 0; j < row; j++) {
         let color = (j % 2 === 0) ? colorOdd : colorEven;
         leftHTML += `<span style="color:${color};">${symbol}</span>`;
@@ -58,10 +58,10 @@ function downLeft(row, height, colorOdd, colorEven, symbol) {
     return leftHTML;
 }
 
-// Lower Right Section (connects to left)
+// Lower Right Section (connects to left side)
 function downRight(row, colorOdd, colorEven, symbol) {
     let rightHTML = "";
-    for (let j = 0; j < row - 1; j++) { // Start at 0 to connect with left
+    for (let j = 0; j < row - 1; j++) { // Start at 0 to connect with left side
         let color = (j % 2 === 0) ? colorOdd : colorEven;
         rightHTML += `<span style="color:${color};">${symbol}</span>`;
     }
