@@ -8,7 +8,6 @@ function generateRhombus() {
     let colorEven = document.getElementById("colorEven").value;
     let symbol = document.getElementById("symbol").value;
 
-  
     let upLeftDiv = document.getElementById("upLeft");
     let upRightDiv = document.getElementById("upRight");
     let downLeftDiv = document.getElementById("downLeft");
@@ -20,72 +19,70 @@ function generateRhombus() {
     }
 
     // Clear previous output
-    upLeftDiv.innerHTML = "";
-    upRightDiv.innerHTML = "";
-    downLeftDiv.innerHTML = "";
-    downRightDiv.innerHTML = "";
+    upLeftDiv.textContent = "";
+    upRightDiv.textContent = "";
+    downLeftDiv.textContent = "";
+    downRightDiv.textContent = "";
 
     // Generate all four sections
-    upRightDiv.innerHTML = upRight(height, colorOdd, colorEven, symbol);
-    downRightDiv.innerHTML = downRight(height, colorOdd, colorEven, symbol);
-    upLeftDiv.innerHTML = upLeft(height, colorOdd, colorEven, symbol);
-    downLeftDiv.innerHTML = downLeft(height, colorOdd, colorEven, symbol);
+    upRightDiv.textContent = upRight(height, colorOdd, colorEven, symbol);
+    downRightDiv.textContent = downRight(height, colorOdd, colorEven, symbol);
+    upLeftDiv.textContent = upLeft(height, colorOdd, colorEven, symbol);
+    downLeftDiv.textContent = downLeft(height, colorOdd, colorEven, symbol);
 }
 
-// Upper Right Triangle (🔺)
+// Upper Right Triangle
 function upRight(height, colorOdd, colorEven, symbol) {
-    let rhombusHTML = "";
+    let rhombusText = "";
     for (let i = 1; i <= height; i++) {
-        rhombusHTML += "<p style='text-align:center;'>";
+        rhombusText += " ".repeat(height - i);
         for (let j = 0; j < i; j++) {
             let color = (j % 2 === 0) ? colorOdd : colorEven;
-            rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
+            rhombusText += `%c${symbol} `;
         }
-        rhombusHTML += "</p>";
+        rhombusText += "\n";
     }
-    return rhombusHTML;
+    return rhombusText;
 }
 
-// Lower Right Triangle (🔻)
+// Lower Right Triangle
 function downRight(height, colorOdd, colorEven, symbol) {
-    let rhombusHTML = "";
+    let rhombusText = "";
     for (let i = height - 1; i > 0; i--) {
-        rhombusHTML += "<p style='text-align:center;'>";
+        rhombusText += " ".repeat(height - i);
         for (let j = 0; j < i; j++) {
             let color = (j % 2 === 0) ? colorOdd : colorEven;
-            rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
+            rhombusText += `%c${symbol} `;
         }
-        rhombusHTML += "</p>";
+        rhombusText += "\n";
     }
-    return rhombusHTML;
+    return rhombusText;
 }
 
-// Upper Left Triangle (🔺)
+// Upper Left Triangle
 function upLeft(height, colorOdd, colorEven, symbol) {
-    let rhombusHTML = "";
+    let rhombusText = "";
     for (let i = 1; i <= height; i++) {
-        rhombusHTML += "<p style='text-align:center;'>";
-        rhombusHTML += "&nbsp;".repeat((height - i) * 2); 
+        rhombusText += " ".repeat(height - i);  // Fixed spacing
         for (let j = 0; j < i; j++) {
             let color = (j % 2 === 0) ? colorOdd : colorEven;
-            rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
+            rhombusText += `%c${symbol} `;
         }
-        rhombusHTML += "</p>";
+        rhombusText += "\n";
     }
-    return rhombusHTML;
+    return rhombusText;
 }
 
-// Lower Left Triangle (🔻)
+// Lower Left Triangle
 function downLeft(height, colorOdd, colorEven, symbol) {
-    let rhombusHTML = "";
+    let rhombusText = "";
     for (let i = height - 1; i > 0; i--) {
-        rhombusHTML += "<p style='text-align:center;'>";
-        rhombusHTML += "&nbsp;".repeat((height - i) * 2); 
+        rhombusText += " ".repeat(height - i);  // Fixed spacing
         for (let j = 0; j < i; j++) {
             let color = (j % 2 === 0) ? colorOdd : colorEven;
-            rhombusHTML += `<span style="color:${color};">${symbol}</span>`;
+            rhombusText += `%c${symbol} `;
         }
-        rhombusHTML += "</p>";
+        rhombusText += "\n";
     }
-    return rhombusHTML;
+    return rhombusText;
 }
