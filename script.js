@@ -8,81 +8,41 @@ function generateRhombus() {
     let colorEven = document.getElementById("colorEven").value;
     let symbol = document.getElementById("symbol").value;
 
-    let upLeftDiv = document.getElementById("upLeft");
-    let upRightDiv = document.getElementById("upRight");
-    let downLeftDiv = document.getElementById("downLeft");
-    let downRightDiv = document.getElementById("downRight");
+    let rhombusDiv = document.getElementById("rhombusDisplay");
 
-    if (!upLeftDiv || !upRightDiv || !downLeftDiv || !downRightDiv) {
-        console.error("Error: One or more required divs are missing.");
+    if (!rhombusDiv) {
+        console.error("Error: rhombus display div missing.");
         return;
     }
 
     // Clear previous output
-    upLeftDiv.textContent = "";
-    upRightDiv.textContent = "";
-    downLeftDiv.textContent = "";
-    downRightDiv.textContent = "";
+    rhombusDiv.innerHTML = "";
 
-    // Generate all four sections
-    upRightDiv.textContent = upRight(height, colorOdd, colorEven, symbol);
-    downRightDiv.textContent = downRight(height, colorOdd, colorEven, symbol);
-    upLeftDiv.textContent = upLeft(height, colorOdd, colorEven, symbol);
-    downLeftDiv.textContent = downLeft(height, colorOdd, colorEven, symbol);
-}
+    let rhombus = "";
 
-// Upper Right Triangle
-function upRight(height, colorOdd, colorEven, symbol) {
-    let rhombusText = "";
+    // Upper part of the rhombus
     for (let i = 1; i <= height; i++) {
-        rhombusText += " ".repeat(height - i);
-        for (let j = 0; j < i; j++) {
-            let color = (j % 2 === 0) ? colorOdd : colorEven;
-            rhombusText += `%c${symbol} `;
-        }
-        rhombusText += "\n";
+        let spaces = "&nbsp;".repeat(height - i); // Adjusted spacing
+        let row = buildSymbols(i, colorOdd, colorEven, symbol);
+        rhombus += `<p style="font-family: monospace;">${spaces}${row}${spaces}</p>`;
     }
-    return rhombusText;
-}
 
-// Lower Right Triangle
-function downRight(height, colorOdd, colorEven, symbol) {
-    let rhombusText = "";
+    // Lower part of the rhombus
     for (let i = height - 1; i > 0; i--) {
-        rhombusText += " ".repeat(height - i);
-        for (let j = 0; j < i; j++) {
-            let color = (j % 2 === 0) ? colorOdd : colorEven;
-            rhombusText += `%c${symbol} `;
-        }
-        rhombusText += "\n";
+        let spaces = "&nbsp;".repeat(height - i); // Adjusted spacing
+        let row = buildSymbols(i, colorOdd, colorEven, symbol);
+        rhombus += `<p style="font-family: monospace;">${spaces}${row}${spaces}</p>`;
     }
-    return rhombusText;
+
+    rhombusDiv.innerHTML = rhombus;
 }
 
-// Upper Left Triangle
-function upLeft(height, colorOdd, colorEven, symbol) {
-    let rhombusText = "";
-    for (let i = 1; i <= height; i++) {
-        rhombusText += " ".repeat(height - i);  // Fixed spacing
-        for (let j = 0; j < i; j++) {
-            let color = (j % 2 === 0) ? colorOdd : colorEven;
-            rhombusText += `%c${symbol} `;
-        }
-        rhombusText += "\n";
+// Function to generate colored symbols
+function buildSymbols(count, colorOdd, colorEven, symbol) {
+    let row = "";
+    for (let j = 0; j < count; j++) {
+        let color = (j % 2 === 0) ? colorOdd : colorEven;
+        row += `<span style="color:${color};">${symbol}&nbsp;</span>`;
     }
-    return rhombusText;
-}
-
-// Lower Left Triangle
-function downLeft(height, colorOdd, colorEven, symbol) {
-    let rhombusText = "";
-    for (let i = height - 1; i > 0; i--) {
-        rhombusText += " ".repeat(height - i);  // Fixed spacing
-        for (let j = 0; j < i; j++) {
-            let color = (j % 2 === 0) ? colorOdd : colorEven;
-            rhombusText += `%c${symbol} `;
-        }
-        rhombusText += "\n";
-    }
-    return rhombusText;
+    return row;
 }
